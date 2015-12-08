@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OASelect</class>
+ <widget class="QDialog" name="OASelect">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>541</width>
+    <height>501</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>541</width>
+    <height>501</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>541</width>
+    <height>501</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>File selection</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="OAOffline.qrc">
+    <normaloff>:/icons/mainIcon</normaloff>:/icons/mainIcon</iconset>
+  </property>
+  <widget class="QListWidget" name="file_list">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>481</width>
+     <height>371</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="abort_button">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>450</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="confirm_button">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>450</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Confirm</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>481</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select the files you want to analyze. CTRL+click to select single files. To select a range of files select the first one and then SHIFT+click the last one.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="select_button">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>450</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Select all</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="OAOffline.qrc"/>
+ </resources>
+ <connections/>
+</ui>

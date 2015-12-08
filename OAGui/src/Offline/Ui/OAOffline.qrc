@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="icons">
+    <file alias="mainIcon">../../Images/oa_offline.png</file>
+  </qresource>
+</RCC>

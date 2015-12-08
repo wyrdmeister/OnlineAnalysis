@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=OA Offline
+Comment=Online Analysis Offline Test Interface
+Exec=OAOffline
+Icon=/usr/local/share/icons/oa_offline.png
+Categories=Education;Science;Physics
+Terminal=false

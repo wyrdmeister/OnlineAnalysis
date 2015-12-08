@@ -1,0 +1,6 @@
+include LICENSE
+include CHANGES.txt
+include bin/*
+include misc/*
+include src/Images/oa_*.png
+include src/Images/oa_*.ico

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=OA Control
+Comment=Online Analysis Control Interface
+Exec=OAControl
+Icon=/usr/local/share/icons/oa_online.png
+Categories=Education;Science;Physics
+Terminal=false

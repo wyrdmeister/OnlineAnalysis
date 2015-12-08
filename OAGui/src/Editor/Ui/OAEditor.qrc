@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="icons">
+    <file alias="mainIcon">../../Images/oa_editor.png</file>
+  </qresource>
+  <qresource prefix="leds">
+    <file alias="redLed">../../Images/circle_red.svg</file>
+    <file alias="greenLed">../../Images/circle_green.svg</file>
+  </qresource>
+</RCC>

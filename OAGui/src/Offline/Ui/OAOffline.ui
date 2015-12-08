@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OAOffline</class>
+ <widget class="QMainWindow" name="OAOffline">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>851</width>
+    <height>761</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>851</width>
+    <height>761</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>851</width>
+    <height>761</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Offline OA Control</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="OAOffline.qrc">
+    <normaloff>:/icons/mainIcon</normaloff>:/icons/mainIcon</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableView" name="result_list">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>110</y>
+      <width>791</width>
+      <height>351</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Results</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>20</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Configuration:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="config_file">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>16</y>
+      <width>461</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>../oa-config.xml</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="config_browse">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>16</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Browse</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>470</y>
+      <width>501</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="plot_selection">
+       <property name="text">
+        <string>Plot selection</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="save_selection">
+       <property name="text">
+        <string>Save selection</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="saveall_button">
+       <property name="text">
+        <string>Save all</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="clear_button">
+       <property name="text">
+        <string>Clear all</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="exit_button">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>477</y>
+      <width>113</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>530</y>
+      <width>131</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Error log</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="error_log">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>550</y>
+      <width>791</width>
+      <height>191</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>35</x>
+      <y>54</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Path:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inpath_browse">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>50</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Browse</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_button">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>16</y>
+      <width>111</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start
+processing</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="inpath">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>50</y>
+      <width>461</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>/home/ldm/.gvfs/store on online4ldm.esce/investigations/20124027/Xe_effusive/Xe_002</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <action name="action_exit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="action_reload">
+   <property name="text">
+    <string>Reload configuration</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>config_file</tabstop>
+  <tabstop>config_browse</tabstop>
+  <tabstop>result_list</tabstop>
+  <tabstop>plot_selection</tabstop>
+  <tabstop>save_selection</tabstop>
+  <tabstop>saveall_button</tabstop>
+  <tabstop>clear_button</tabstop>
+ </tabstops>
+ <resources>
+  <include location="OAOffline.qrc"/>
+ </resources>
+ <connections/>
+</ui>

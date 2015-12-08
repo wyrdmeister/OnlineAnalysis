@@ -1,0 +1,1487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OAEditor</class>
+ <widget class="QMainWindow" name="OAEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1231</width>
+    <height>941</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1231</width>
+    <height>941</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1231</width>
+    <height>941</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Online Analysis Configuration Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="OAEditor.qrc">
+    <normaloff>:/icons/mainIcon</normaloff>:/icons/mainIcon</iconset>
+  </property>
+  <property name="whatsThis">
+   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies the full path of the file that will be loaded by the OnlineAnalysis server. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;WARNING: change it only if you know what you are doing. A wrong path will prevent the OA to load the new configuration file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="main_tab">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>330</y>
+      <width>1191</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Each tab is devoted to the configuration of a part of the OnlineAnalysis server. The &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;Output&amp;quot;&lt;/span&gt; tab is used to configure the output server. The &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;Raw data&amp;quot;&lt;/span&gt; tab is used to configure which dataset are loaded from the HDF5 files. The &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;Algorithms&amp;quot;&lt;/span&gt; tab configure the processing part. The &lt;span style=&quot; font-weight:600;&quot;&gt;&amp;quot;Presentation&amp;quot;&lt;/span&gt; part configures the post-processing part (i.e. data accumulation).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="output_tab">
+     <attribute name="title">
+      <string>Output</string>
+     </attribute>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>691</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>25</y>
+         <width>66</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Module</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>65</y>
+         <width>66</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Class</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>104</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Original path RE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>144</y>
+         <width>121</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Substitution path</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="oa_module">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>20</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The module from which the OnlineAnalysis server should load the processing output class. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here may prevent the OA from working. Change it only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="oa_class">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>60</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Python class that will handle the output of the processing part, i.e. the results from the algorithms. The standard output modules are:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;NoOut:&lt;/b&gt; this module will do nothing&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;OA2HDF:&lt;/b&gt; this module will save the results in an HDF5 file (one file for each input file, with results saved bunch by bunch).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here may prevent the OA from working. Change it only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="oa_path_re">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>100</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;A regular expression used by the OA2HDF output module to mangle the path of the file loaded by the OA to produce the path in which the ouput file should be saved.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here will prevent the OA2HDF module from saving files or may save files in unexpected locations. Change it with care.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="oa_outpath">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>140</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The value used by the OA2HDF module as a replacement for the path selected by the regular expression to produce the output path.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here will prevent the OA2HDF module from saving files or may save files in unexpected locations. Change it with care.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>230</y>
+        <width>691</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>65</y>
+         <width>66</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Class</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>25</y>
+         <width>66</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Module</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>35</x>
+         <y>103</y>
+         <width>101</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TANGO device</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="pres_module">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>20</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The module from which the OnlineAnalysis server should load the presentation output class. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here may prevent the OA from working. Change it only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="pres_class">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>60</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The Python class that will handle the output of the post-processing part, i.e. the results from the presenters. The standard output modules are:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;NoOut:&lt;/b&gt; this module will do nothing&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Export2Tango:&lt;/b&gt; this module will output the results to a DynamicAttribute TANGO server.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here may prevent the OA from working. Change it only if you know what you are doing.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="pres_device">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>100</y>
+         <width>521</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="whatsThis">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The path to the DynamicAttribute TANGO device that will handle the distribution of the results. If the device is not configured in the standard TANGO database for the machine hosting the OA server, the full address of the DB server must be specified (e.g. dbserver.elettra.trieste.unimi.it:10000/path/to/dynserver)&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: a wrong value here will prevent the Export2Tango module to operate. Change it with care.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="editable">
+        <bool>true</bool>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>220</y>
+        <width>201</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Online analysis presentation</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>161</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>true</bool>
+      </property>
+      <property name="text">
+       <string>Online analysis output</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="rawdata_tab">
+     <attribute name="title">
+      <string>Raw data</string>
+     </attribute>
+     <widget class="QTableView" name="raw_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>1041</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of all the raw datasets configured in the current profile. Only those with the enable tick will be included in the output file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="cornerButtonEnabled">
+       <bool>false</bool>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+     </widget>
+     <widget class="QPushButton" name="raw_add">
+      <property name="geometry">
+       <rect>
+        <x>1070</x>
+        <y>10</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new dataset definition.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="raw_loadhdf">
+      <property name="geometry">
+       <rect>
+        <x>1070</x>
+        <y>90</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate dataset definitions starting from an HDF5 file. The file should be available locally on the PC running the editor. After the file is loaded a window is presented to review the datasets. The selected ones may be both appended to the current configuration or may replace it completely.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Load HDF5</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="raw_remove">
+      <property name="geometry">
+       <rect>
+        <x>1070</x>
+        <y>50</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the currently selected element.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="raw_clear">
+      <property name="geometry">
+       <rect>
+        <x>1070</x>
+        <y>130</y>
+        <width>98</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the currently selected algorithm. The new algorithm will be appended at the end of the processing pipeline and it's output variables will be cleared.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Clear
+disabled</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="algo_tab">
+     <attribute name="title">
+      <string>Algorithms</string>
+     </attribute>
+     <widget class="QTableView" name="algo_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>591</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of all the algorithms configured in the current profile. Only those with the enable tick will be included in the output file. The algorithms will be executed in the order in which they are displayed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_moveup">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>10</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move the selected algorithm earlier in the processing pipeline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Move Up</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_movedown">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>50</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Move the selected algorithm later in the processing pipeline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Move Down</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_add">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>90</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new algorithm. The new algorithm will be appended at the end of the processing pipeline.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_remove">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>130</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the currenly selected algorithm.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="algo_param_list">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>441</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The parameter list of the currently selected algorithm.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>10</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Parameters</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_duplicate">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>170</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the currently selected algorithm. The new algorithm will be appended at the end of the processing pipeline and it's output variables will be cleared.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Duplicate</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="algo_clear">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>210</y>
+        <width>98</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the currently selected algorithm. The new algorithm will be appended at the end of the processing pipeline and it's output variables will be cleared.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Clear
+disabled</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="pres_tab">
+     <attribute name="title">
+      <string>Presentation</string>
+     </attribute>
+     <widget class="QTableView" name="pres_list">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>591</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of all the presenters configured in the current profile. Only those with the enable tick will be included in the output file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pres_add">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>10</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new presenter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pres_remove">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>50</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the currently selected presenter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>10</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Parameters</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="pres_param_list">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>30</y>
+        <width>441</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Parameter list of the currently selected presenter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>180</y>
+        <width>81</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filters</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="filter_list">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>200</y>
+        <width>441</width>
+        <height>141</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The filter list of the currently selected presenter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>740</x>
+        <y>350</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="filter_add">
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new filter to the current presenter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Add filter</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="filter_remove">
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Remove the currently selected filter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="text">
+          <string>Remove filter</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pres_duplicate">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>90</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the currently selected presenter. The output variables of the new presenter will be cleared.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Duplicate</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pres_clear">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>130</y>
+        <width>98</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="whatsThis">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the currently selected algorithm. The new algorithm will be appended at the end of the processing pipeline and it's output variables will be cleared.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>Clear
+disabled</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="exit">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>900</y>
+      <width>151</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Close the configuration editor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Close</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>951</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="config_file">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>10</y>
+       <width>361</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The path to the configuration file for the editor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>/home/ldm/OAConfig/oa_editor_config.xml</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>34</x>
+       <y>14</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Configuration file</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="config_load">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>10</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Load the specified configuration file.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;NOTE: reloading will discard all the unsaved modifications to all profiles.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Load</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="config_browse">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>10</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pippo!&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open a file browser to search for the editor's configuration file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Browse</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="config_save">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>10</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save all the modifications to the configuration file. Note that all profiles will be saved, not only the current one.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="config_saveas">
+     <property name="geometry">
+      <rect>
+       <x>840</x>
+       <y>10</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Save a backup copy of the configuration file to a different location.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Save as...</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="profile_list">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>44</y>
+       <width>361</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the current configuration profile. Changing profile will not affect modifications made to other profiles.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>4</x>
+       <y>46</y>
+       <width>151</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Configuration profile</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="profile_add">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>44</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add a new empty profile to the configuration.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Add new</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="profile_delete">
+     <property name="geometry">
+      <rect>
+       <x>640</x>
+       <y>44</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Delete the currently selected profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="profile_rename">
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>44</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rename the currently selected profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Rename</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="profile_duplicate">
+     <property name="geometry">
+      <rect>
+       <x>840</x>
+       <y>44</y>
+       <width>91</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Duplicate the current profile.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Duplicate</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>16</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;
+padding: 4px;
+color: white</string>
+    </property>
+    <property name="text">
+     <string>Input configuration</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_20">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>136</y>
+      <width>191</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;
+padding: 4px;
+color: white</string>
+    </property>
+    <property name="text">
+     <string>OA server configuration</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="frame_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>160</y>
+      <width>951</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="output_browse">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>10</y>
+       <width>121</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open a file browser to select the location of the output configuration file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Browse</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>33</x>
+       <y>13</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Output file</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="output_generate">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>40</y>
+       <width>151</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate a new configuration file for the Online Analysis server. The new file will not be used until a reload command will be issued to the OA server.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Generate</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>31</x>
+       <y>73</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OA processing</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>103</y>
+       <width>141</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OA post-processing</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>29</x>
+       <y>44</y>
+       <width>121</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>OA Server</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="output_genreload">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>70</y>
+       <width>151</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Generate a new configuration file for the Online Analysis server and issue a reload command.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Generate &amp;&amp; Reload</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="output_reload">
+     <property name="geometry">
+      <rect>
+       <x>780</x>
+       <y>100</y>
+       <width>151</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Issue a reload command to the Online Analysis server. Without a new configuration file, this is equivalent to a complete reset of the OA output.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Reload</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="tango_browse">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>40</y>
+       <width>121</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Browse the TANGO database to select the OA server. Works only if the environment variable TANGO_HOST is set.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="text">
+      <string>Browse TANGO</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="oa_postprocess">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>100</y>
+       <width>441</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The post-processing module and function loaded by the WorkSpawner server.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;WARNING: change it only if you know what you are doing. A wrong value will prevent the OA to operate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="oa_outputfile">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>10</y>
+       <width>441</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specifies the full path of the file that will be loaded by the OnlineAnalysis server. &lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;WARNING: change it only if you know what you are doing. A wrong path will prevent the OA to load the new configuration file.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="oa_server">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>40</y>
+       <width>441</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;TANGO device of the Online Analysisi server.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;WARNING: change it only if you know what you are doing. A wrong value will prevent the OA to operate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="oa_process">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>70</y>
+       <width>441</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The processing module and function loaded by the WorkSpawner server.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-weight:600;&quot;&gt;WARNING: change it only if you know what you are doing. A wrong value will prevent the OA to operate.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="en_tango">
+     <property name="geometry">
+      <rect>
+       <x>620</x>
+       <y>73</y>
+       <width>131</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Enable TANGO</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>15</y>
+      <width>61</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;
+padding: 4px;
+color: white</string>
+    </property>
+    <property name="text">
+     <string>Help</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="log_list">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>760</y>
+      <width>1191</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This box will show all the logging events from the editor applications. Useful to debug problems that are not clearly presented by error popups. When asking for help, look here to find latest errors occured.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="help_text">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>39</y>
+      <width>231</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="undoRedoEnabled">
+     <bool>false</bool>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Online help. Move the cursor over a control to see a brief description.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::NoTextInteraction</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="notification" native="true">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>309</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="fix_errors">
+    <property name="geometry">
+     <rect>
+      <x>882</x>
+      <y>312</y>
+      <width>81</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Open a file browser to select the location of the output configuration file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string>Fix errors</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_22">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>310</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Configuration integrity:</string>
+    </property>
+   </widget>
+  </widget>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>config_file</tabstop>
+  <tabstop>config_browse</tabstop>
+  <tabstop>config_load</tabstop>
+  <tabstop>config_save</tabstop>
+  <tabstop>config_saveas</tabstop>
+  <tabstop>profile_list</tabstop>
+  <tabstop>profile_add</tabstop>
+  <tabstop>profile_delete</tabstop>
+  <tabstop>profile_rename</tabstop>
+  <tabstop>profile_duplicate</tabstop>
+  <tabstop>oa_outputfile</tabstop>
+  <tabstop>output_browse</tabstop>
+  <tabstop>oa_server</tabstop>
+  <tabstop>tango_browse</tabstop>
+  <tabstop>oa_process</tabstop>
+  <tabstop>oa_postprocess</tabstop>
+  <tabstop>output_generate</tabstop>
+  <tabstop>output_genreload</tabstop>
+  <tabstop>output_reload</tabstop>
+  <tabstop>main_tab</tabstop>
+  <tabstop>oa_module</tabstop>
+  <tabstop>oa_class</tabstop>
+  <tabstop>oa_path_re</tabstop>
+  <tabstop>oa_outpath</tabstop>
+  <tabstop>pres_module</tabstop>
+  <tabstop>pres_class</tabstop>
+  <tabstop>pres_device</tabstop>
+  <tabstop>raw_list</tabstop>
+  <tabstop>raw_add</tabstop>
+  <tabstop>raw_remove</tabstop>
+  <tabstop>raw_loadhdf</tabstop>
+  <tabstop>raw_clear</tabstop>
+  <tabstop>algo_list</tabstop>
+  <tabstop>algo_moveup</tabstop>
+  <tabstop>algo_movedown</tabstop>
+  <tabstop>algo_add</tabstop>
+  <tabstop>algo_remove</tabstop>
+  <tabstop>algo_duplicate</tabstop>
+  <tabstop>algo_clear</tabstop>
+  <tabstop>algo_param_list</tabstop>
+  <tabstop>pres_list</tabstop>
+  <tabstop>pres_add</tabstop>
+  <tabstop>pres_remove</tabstop>
+  <tabstop>pres_duplicate</tabstop>
+  <tabstop>pres_clear</tabstop>
+  <tabstop>pres_param_list</tabstop>
+  <tabstop>filter_list</tabstop>
+  <tabstop>filter_add</tabstop>
+  <tabstop>filter_remove</tabstop>
+  <tabstop>help_text</tabstop>
+  <tabstop>log_list</tabstop>
+  <tabstop>exit</tabstop>
+ </tabstops>
+ <resources>
+  <include location="OAEditor.qrc"/>
+ </resources>
+ <connections/>
+</ui>

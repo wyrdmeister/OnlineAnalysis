@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SCRIPTPATH=$( cd $(dirname $0) ; pwd -P )
+
+PYUIC=`which pyuic4`
+UI=$( cd $SCRIPTPATH; ls *.ui )
+
+if [[ -x $PYUIC ]]; then
+  rm $SCRIPTPATH/__init__.py
+  touch $SCRIPTPATH/__init__.py
+  for F in `echo $UI`; do
+    OUT=`echo "Ui_$F" | sed -e 's/\.ui/\.py/'`
+    IN="$SCRIPTPATH/$F"
+    echo "Compiling $F to $OUT..."
+    $PYUIC "$IN" -o "$SCRIPTPATH/$OUT"
+    M=`echo $OUT | sed -e 's/\.py//'`
+    echo "from $M import $M" >> $SCRIPTPATH/__init__.py
+  done
+else
+  echo "Error: cannot find pyuic4. You must install the package 'pyqt4-dev-tools'."
+fi

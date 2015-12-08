@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OALoadHDF</class>
+ <widget class="QDialog" name="OALoadHDF">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>871</width>
+    <height>491</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>871</width>
+    <height>491</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>871</width>
+    <height>491</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Load from HDF5</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="OAEditor.qrc">
+    <normaloff>:/icons/mainIcon</normaloff>:/icons/mainIcon</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <widget class="QTableView" name="dataset_list">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>160</y>
+     <width>811</width>
+     <height>251</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancel">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>430</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="replace">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>430</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Replace</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="append">
+   <property name="geometry">
+    <rect>
+     <x>740</x>
+     <y>430</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Append</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>10</y>
+     <width>811</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:600;&quot;&gt;Load from HDF5&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Select the datasets you want and the press &lt;span style=&quot; font-weight:600;&quot;&gt;Replace&lt;/span&gt; to replace the existing configuration with the new one. Instead press &lt;span style=&quot; font-weight:600;&quot;&gt;Append&lt;/span&gt; to append the selected datasets to the present configuration. Press &lt;span style=&quot; font-weight:600;&quot;&gt;Cancel&lt;/span&gt; to abort.&lt;/p&gt;&lt;p&gt;It's possible to rename a dataset directly in this window. The HDF5 file path instead cannot be changed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::RichText</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="OAEditor.qrc"/>
+ </resources>
+ <connections/>
+</ui>

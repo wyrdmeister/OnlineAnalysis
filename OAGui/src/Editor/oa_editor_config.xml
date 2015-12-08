@@ -1,0 +1,525 @@
+<configuration>
+  <main>
+    <parameter name="oa_process" selected="1">OnlineAnalysis.oa_root&gt;oa_single.process</parameter>
+    <parameter name="outfile" selected="0">/media/scratch/new_fermidaq/OA/OAConfig.xml</parameter>
+    <parameter name="outfile" selected="1">../oa-config.xml</parameter>
+    <parameter name="outfile" selected="0">devel/ldm/OnlineAnalysis/oa-config.xml</parameter>
+    <parameter name="oa_present" selected="1">OnlineAnalysis.oa_root&gt;oa_present.update</parameter>
+    <parameter name="oa_device" selected="0">pcmirror.fisica.unimi.it:20000/ldm/processing/workspwaner</parameter>
+    <parameter name="oa_device" selected="0">ldm/postprocessing/ws</parameter>
+    <parameter name="oa_device" selected="0">pcmirror.fisica.unimi.it:10000/ldm/processing/workspwaner</parameter>
+    <parameter name="oa_device" selected="0">pcmirror.fisica.unimi.it:10000/ldm/processing/ws</parameter>
+    <parameter name="oa_device" selected="1">breakwater.esce:10000/LDM/postprocessing/ws</parameter>
+  </main>
+  <profile name="test">
+    <output type="oa">
+      <parameter name="module" selected="1">OnlineAnalysis.Output</parameter>
+      <parameter name="path_re" selected="1">^\/net\/memory4fermi\/store\/projects\/</parameter>
+      <parameter name="path_re" selected="0">^\/scratch\/LDM_RUN12\/</parameter>
+      <parameter name="class" selected="1">NoOut</parameter>
+      <parameter name="class" selected="0">OA2HDF</parameter>
+      <parameter name="outpath" selected="1">/net/memory4fermi/store/projects/LDM_RUN12/OA/</parameter>
+      <parameter name="outpath" selected="0">/tmp/</parameter>
+    </output>
+    <output type="present">
+      <parameter name="device" selected="0">pcmirror.fisica.unimi.it:20000/ldm/view/dyn_attr</parameter>
+      <parameter name="device" selected="1">ldm/view/dynattr</parameter>
+      <parameter name="device" selected="0">pcmirror.fisica.unimi.it:10000/ldm/view/dyn_attr</parameter>
+      <parameter name="class" selected="1">Export2Tango</parameter>
+      <parameter name="class" selected="0">NoOut</parameter>
+      <parameter name="module" selected="1">OnlineAnalysis.OutputPres</parameter>
+    </output>
+    <rawdata enabled="1" name="bunches">
+      <type>Scalar</type>
+      <path>bunches</path>
+    </rawdata>
+    <rawdata enabled="1" name="channels">
+      <type>Array</type>
+      <path>digitizer/channels</path>
+    </rawdata>
+    <rawdata enabled="1" name="iom_sh_a">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_sh_a</path>
+    </rawdata>
+    <rawdata enabled="1" name="andor">
+      <type>Image</type>
+      <path>vmi/andor</path>
+    </rawdata>
+    <algorithm enabled="1" name="extr_ch0">
+      <type>DigitizerSplit</type>
+      <order>2</order>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="output" type="outvar">ch0</parameter>
+      <parameter name="baseline" type="expr">[0, 100]</parameter>
+      <parameter name="channel" type="list">0</parameter>
+      <parameter name="target" type="var">channels</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="bunches_preserve">
+      <type>Preserve</type>
+      <order>1</order>
+      <parameter name="output" type="outvar">bnum</parameter>
+      <parameter name="target" type="var">bunches</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="i0_preserve">
+      <type>Preserve</type>
+      <order>0</order>
+      <parameter name="output" type="outvar">I0</parameter>
+      <parameter name="target" type="var">iom_sh_a</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="img_filter">
+      <type>ImageFilter</type>
+      <order>7</order>
+      <parameter name="threshold" type="expr">0.0</parameter>
+      <parameter name="output" type="outvar">vmi_full</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="baseline" type="expr">100</parameter>
+      <parameter name="target" type="var">andor</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="img_profile">
+      <type>ImageProfile</type>
+      <order>8</order>
+      <parameter name="out_hor" type="outvar">vmi_oriz</parameter>
+      <parameter name="out_vert" type="outvar">vmi_vert</parameter>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="aoi" type="expr">[0, 1280, 500, 580]</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="img_profile2">
+      <type>ImageProfile</type>
+      <order>9</order>
+      <parameter name="out_hor" type="outvar">h2</parameter>
+      <parameter name="out_vert" type="outvar">v2</parameter>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="aoi" type="expr">[600, 680, 0, 1080]</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <presenter enabled="1" name="ch0_sum">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">ch0</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">ch0sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="1" name="vmi_sum">
+      <type>ImageSum</type>
+      <parameter name="output" type="tango">vmi_sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+    </presenter>
+    <presenter enabled="1" name="i0_hist">
+      <type>ScalarHistogram</type>
+      <parameter name="output" type="tango">i0_hist</parameter>
+      <parameter name="range" type="expr">[0.0, 100.0]</parameter>
+      <parameter name="target" type="var">I0</parameter>
+      <parameter name="bins" type="expr">60</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="1" name="vmi_vert">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">vmi_vert</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">vmi_vert</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="1" name="vmi_hor">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">h2</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">vmi_hor</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+  </profile>
+  <profile name="VMI_projection">
+    <output type="present">
+      <parameter name="device" selected="0">pcmirror.fisica.unimi.it:20000/ldm/view/dyn_attr</parameter>
+      <parameter name="device" selected="1">ldm/view/dynattr</parameter>
+      <parameter name="device" selected="0">pcmirror.fisica.unimi.it:10000/ldm/view/dyn_attr</parameter>
+      <parameter name="class" selected="1">Export2Tango</parameter>
+      <parameter name="class" selected="0">NoOut</parameter>
+      <parameter name="module" selected="1">OnlineAnalysis.OutputPres</parameter>
+    </output>
+    <output type="oa">
+      <parameter name="outpath" selected="1">/net/memory4fermi/store/projects/LDM_RUN12/OA/</parameter>
+      <parameter name="outpath" selected="0">/tmp/</parameter>
+      <parameter name="path_re" selected="1">^\/net\/memory4fermi\/store\/projects\/</parameter>
+      <parameter name="path_re" selected="0">^\/scratch\/LDM_RUN12\/</parameter>
+      <parameter name="class" selected="1">NoOut</parameter>
+      <parameter name="class" selected="0">OA2HDF</parameter>
+      <parameter name="module" selected="1">OnlineAnalysis.Output</parameter>
+    </output>
+    <rawdata enabled="1" name="bunches">
+      <type>Scalar</type>
+      <path>bunches</path>
+    </rawdata>
+    <rawdata enabled="0" name="channels">
+      <type>Array</type>
+      <path>digitizer/channels</path>
+    </rawdata>
+    <rawdata enabled="1" name="iom_sh_a">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_sh_a</path>
+    </rawdata>
+    <rawdata enabled="1" name="andor">
+      <type>Image</type>
+      <path>vmi/andor</path>
+    </rawdata>
+    <algorithm enabled="1" name="i0_preserve">
+      <type>Preserve</type>
+      <order>0</order>
+      <parameter name="output" type="outvar">I0</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="target" type="var">iom_sh_a</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="b_preserve">
+      <type>Preserve</type>
+      <order>1</order>
+      <parameter name="output" type="outvar">bnum</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="target" type="var">bunches</parameter>
+    </algorithm>
+    <algorithm enabled="0" name="test">
+      <type>ComputeScalarExpr</type>
+      <order>2</order>
+      <parameter name="output" type="outvar">pippo</parameter>
+      <parameter name="expression" type="expr">np.sum(np.sum(andor)) + np.sum(channels)</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="target" type="var">['andor', 'channels']</parameter>
+    </algorithm>
+    <algorithm enabled="0" name="andor">
+      <type>Preserve</type>
+      <order>3</order>
+      <parameter name="output" type="outvar">vmi</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="target" type="var">andor</parameter>
+    </algorithm>
+    <algorithm enabled="0" name="img_profile">
+      <type>ImageProfile</type>
+      <order>4</order>
+      <parameter name="out_hor" type="outvar">vmi_h</parameter>
+      <parameter name="out_vert" type="outvar">vmi_v</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="aoi" type="expr">[600, 680, 0, 1080]</parameter>
+      <parameter name="target" type="var">vmi</parameter>
+    </algorithm>
+    <algorithm enabled="0" name="prrr">
+      <type>DigitizerJitter</type>
+      <order>5</order>
+      <parameter name="reference" type="var" />
+      <parameter name="maxt0" type="expr">200</parameter>
+      <parameter name="target" type="var" />
+      <parameter name="fraction" type="expr">0.5</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="annular_test">
+      <type>ImageAnnularFilter</type>
+      <order>6</order>
+      <parameter name="outer" type="expr">[300.0]</parameter>
+      <parameter name="center" type="expr">[445, 455]</parameter>
+      <parameter name="inner" type="expr">[280.0]</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="output" type="outvar">vmi_annulus</parameter>
+      <parameter name="target" type="var">andor</parameter>
+    </algorithm>
+    <presenter enabled="0" name="vmi">
+      <type>ImageBackground</type>
+      <parameter name="target" type="var">vmi</parameter>
+      <parameter name="period" type="expr">10</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">vmi_sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+      <filter enabled="0" operator="and" target="I0" type="gt">10</filter>
+      <filter enabled="0" operator="and" target="I0" type="expr">~np.isnan(x)</filter>
+    </presenter>
+    <presenter enabled="0" name="pippo">
+      <type>Scatter</type>
+      <parameter name="y" type="var">pippo</parameter>
+      <parameter name="output" type="tango">pippo</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+      <parameter name="x" type="var">I0</parameter>
+    </presenter>
+    <presenter enabled="0" name="vmi_prof">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">vmi_v</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">vmi_vert</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="1" name="io_hist">
+      <type>ScalarHistogram</type>
+      <parameter name="output" type="tango">i0_hist</parameter>
+      <parameter name="range" type="expr">[0.0, 100.0]</parameter>
+      <parameter name="target" type="var">I0</parameter>
+      <parameter name="bins" type="expr">100</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="0" name="test">
+      <type>ImageBackground</type>
+      <parameter name="target" type="var" />
+      <parameter name="period" type="expr">2</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango" />
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var" />
+    </presenter>
+    <presenter enabled="1" name="vmi_sum">
+      <type>ImageSum</type>
+      <parameter name="output" type="tango">vmi</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="target" type="var">vmi_annulus</parameter>
+      <parameter name="bunches" type="var" />
+    </presenter>
+  </profile>
+  <profile name="profile1">
+    <output type="oa">
+      <parameter name="module" selected="1">OnlineAnalysis.Output</parameter>
+      <parameter name="path_re" selected="1">^\/net\/memory4fermi\/store\/projects\/</parameter>
+      <parameter name="path_re" selected="0">^\/scratch\/LDM_RUN12\/</parameter>
+      <parameter name="class" selected="1">NoOut</parameter>
+      <parameter name="class" selected="0">OA2HDF</parameter>
+      <parameter name="outpath" selected="1">/net/memory4fermi/store/projects/LDM_RUN12/OA/</parameter>
+      <parameter name="outpath" selected="0">/tmp/</parameter>
+    </output>
+    <output type="present">
+      <parameter name="device" selected="0">pcmirror.fisica.unimi.it:20000/ldm/view/dyn_attr</parameter>
+      <parameter name="device" selected="0">ldm/view/dynattr</parameter>
+      <parameter name="device" selected="1">pcmirror.fisica.unimi.it:10000/ldm/view/dyn_attr</parameter>
+      <parameter name="class" selected="1">Export2Tango</parameter>
+      <parameter name="class" selected="0">NoOut</parameter>
+      <parameter name="module" selected="1">OnlineAnalysis.OutputPres</parameter>
+    </output>
+    <rawdata enabled="1" name="bunches">
+      <type>Scalar</type>
+      <path>bunches</path>
+    </rawdata>
+    <rawdata enabled="1" name="channels">
+      <type>Array</type>
+      <path>digitizer/channels</path>
+    </rawdata>
+    <rawdata enabled="1" name="evr_ch0_camera">
+      <type>Metadata</type>
+      <path>endstation/evr_ch0_camera</path>
+    </rawdata>
+    <rawdata enabled="1" name="evr_ch1_scope">
+      <type>Metadata</type>
+      <path>endstation/evr_ch1_scope</path>
+    </rawdata>
+    <rawdata enabled="0" name="evr_ch2_valve">
+      <type>Metadata</type>
+      <path>endstation/evr_ch2_valve</path>
+    </rawdata>
+    <rawdata enabled="1" name="iom_sh_a">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_sh_a</path>
+    </rawdata>
+    <rawdata enabled="0" name="iom_sh_a_pc">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_sh_a_pc</path>
+    </rawdata>
+    <rawdata enabled="0" name="iom_uh_a">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_uh_a</path>
+    </rawdata>
+    <rawdata enabled="0" name="iom_uh_a_pc">
+      <type>Scalar</type>
+      <path>photon_diagnostics/I0_monitor/iom_uh_a_pc</path>
+    </rawdata>
+    <rawdata enabled="1" name="andor">
+      <type>Image</type>
+      <path>vmi/andor</path>
+    </rawdata>
+    <algorithm enabled="1" name="integrate_peaks0">
+      <type>IntegratePeaks</type>
+      <order>4</order>
+      <parameter name="ranges" type="expr">[[10260, 10500], [14140, 14520]]</parameter>
+      <parameter name="output" type="outvar">['ch0p1', 'ch0p2']</parameter>
+      <parameter name="result" type="restype">1</parameter>
+      <parameter name="baseline" type="expr">0</parameter>
+      <parameter name="target" type="var">ch0</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="integrate_peaks1">
+      <type>IntegratePeaks</type>
+      <order>5</order>
+      <parameter name="ranges" type="expr">[[10260, 10500], [14140, 14520]]</parameter>
+      <parameter name="output" type="outvar">['ch1p1', 'ch1p2']</parameter>
+      <parameter name="result" type="restype">1</parameter>
+      <parameter name="baseline" type="expr">0</parameter>
+      <parameter name="target" type="var">ch1</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="extr_ch0">
+      <type>DigitizerSplit</type>
+      <order>2</order>
+      <parameter name="output" type="outvar">ch0</parameter>
+      <parameter name="target" type="var">channels</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="channel" type="list">0</parameter>
+      <parameter name="baseline" type="expr" />
+    </algorithm>
+    <algorithm enabled="1" name="extr_ch1">
+      <type>DigitizerSplit</type>
+      <order>3</order>
+      <parameter name="output" type="outvar">ch1</parameter>
+      <parameter name="target" type="var">channels</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="channel" type="list">1</parameter>
+      <parameter name="baseline" type="expr" />
+    </algorithm>
+    <algorithm enabled="0" name="img_bin">
+      <type>ImageBin</type>
+      <order>6</order>
+      <parameter name="output" type="outvar">img_bin</parameter>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="bunches_preserve">
+      <type>Preserve</type>
+      <order>1</order>
+      <parameter name="output" type="outvar">bnum</parameter>
+      <parameter name="target" type="var">bunches</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="i0_preserve">
+      <type>Preserve</type>
+      <order>0</order>
+      <parameter name="output" type="outvar">I0</parameter>
+      <parameter name="target" type="var">iom_sh_a</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="img_filter">
+      <type>ImageFilter</type>
+      <order>7</order>
+      <parameter name="threshold" type="expr">5.0</parameter>
+      <parameter name="output" type="outvar">vmi_full</parameter>
+      <parameter name="target" type="var">andor</parameter>
+      <parameter name="result" type="restype">2</parameter>
+      <parameter name="baseline" type="expr">100</parameter>
+    </algorithm>
+    <algorithm enabled="1" name="img_profile">
+      <type>ImageProfile</type>
+      <order>8</order>
+      <parameter name="out_hor" type="outvar">vmi_oriz</parameter>
+      <parameter name="out_vert" type="outvar">vmi_vert</parameter>
+      <parameter name="target" type="var">andor</parameter>
+      <parameter name="aoi" type="expr">[0, 2560, 0, 2160]</parameter>
+      <parameter name="result" type="restype">2</parameter>
+    </algorithm>
+    <presenter enabled="0" name="ratio_trend_ch0">
+      <type>ScalarTrend</type>
+      <parameter name="output" type="tango">norm_ratio_ch0</parameter>
+      <parameter name="target" type="var">ch0_ratio</parameter>
+      <parameter name="bnum" type="var">bnum</parameter>
+      <parameter name="size" type="expr">1000</parameter>
+      <filter enabled="0" operator="and" target="I0" type="gt">40</filter>
+      <filter enabled="0" operator="and" target="I0" type="lt">500</filter>
+    </presenter>
+    <presenter enabled="0" name="ratio_trend_ch1">
+      <type>ScalarTrend</type>
+      <parameter name="output" type="tango">norm_ratio_ch1</parameter>
+      <parameter name="target" type="var">ch1_ratio</parameter>
+      <parameter name="bnum" type="var">bnum</parameter>
+      <parameter name="size" type="expr">1000</parameter>
+    </presenter>
+    <presenter enabled="1" name="ch0_sum">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">ch0</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">ch0sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+      <filter enabled="1" operator="and" target="I0" type="gt">0</filter>
+      <filter enabled="1" operator="and" target="I0" type="lt">500</filter>
+    </presenter>
+    <presenter enabled="1" name="ch1_sum">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">ch1</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">ch1sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="0" name="vmi_sum">
+      <type>ImageSum</type>
+      <parameter name="output" type="expr">vmi_sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="bnum" type="var">bnum</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+    </presenter>
+    <presenter enabled="1" name="i0_hist">
+      <type>ScalarHistogram</type>
+      <parameter name="output" type="tango">i0_hist</parameter>
+      <parameter name="range" type="expr">[0, 200]</parameter>
+      <parameter name="target" type="var">I0</parameter>
+      <parameter name="bins" type="expr">100</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="0" name="vmi_bin">
+      <type>ImageSum</type>
+      <parameter name="output" type="tango">vmi_bin</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="bnum" type="var">bnum</parameter>
+      <parameter name="target" type="var">img_bin</parameter>
+    </presenter>
+    <presenter enabled="0" name="ch1_stats">
+      <type>ScalarStatistics</type>
+      <parameter name="prefix" type="expr">ch1</parameter>
+      <parameter name="target" type="var">ch1_ratio</parameter>
+      <parameter name="bunches" type="var" />
+      <filter enabled="0" operator="and" target="ch1_ratio" type="expr">~np.isnan(x)</filter>
+      <filter enabled="0" operator="and" target="ch1_ratio" type="expr">~np.isinf(x)</filter>
+    </presenter>
+    <presenter enabled="0" name="ch0_stats">
+      <type>ScalarStatistics</type>
+      <parameter name="prefix" type="expr">ch0</parameter>
+      <parameter name="target" type="var">ch0_ratio</parameter>
+      <parameter name="bunches" type="var" />
+    </presenter>
+    <presenter enabled="1" name="vmi_diff">
+      <type>ImageBackground</type>
+      <parameter name="target" type="var">vmi_full</parameter>
+      <parameter name="period" type="expr">2</parameter>
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">img_diff</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+    <presenter enabled="1" name="p1_vs_i0">
+      <type>Scatter</type>
+      <parameter name="y" type="var">ch1p1</parameter>
+      <parameter name="x" type="var">I0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+      <parameter name="output" type="tango">p1_vs_i0</parameter>
+      <filter enabled="1" operator="and" target="ch1p1" type="expr">~np.isnan(x)</filter>
+      <filter enabled="1" operator="and" target="ch1p1" type="expr">~np.isinf(x)</filter>
+    </presenter>
+    <presenter enabled="1" name="vmi_vert">
+      <type>SpectrumSum</type>
+      <parameter name="target" type="var">vmi_vert</parameter>
+      <parameter name="calibration" type="list" />
+      <parameter name="mode" type="list">avg</parameter>
+      <parameter name="output" type="tango">vert_sum</parameter>
+      <parameter name="avg" type="expr">0</parameter>
+      <parameter name="bunches" type="var">bnum</parameter>
+    </presenter>
+  </profile>
+  <profile name="profile2">
+    <output type="present" />
+    <output type="oa" />
+  </profile>
+</configuration>

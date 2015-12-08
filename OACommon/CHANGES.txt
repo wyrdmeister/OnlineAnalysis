@@ -1,0 +1,2 @@
+v1.0.0, 2013-04-08 -- Initial release.
+v1.1.0, 2015-05-08 -- First version loaded on GitHub
