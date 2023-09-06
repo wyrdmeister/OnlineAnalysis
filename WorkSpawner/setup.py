@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Online Analysis - OA Server Setup
+Online Analysis - WorkSpawner device server
 
-Version 1.1
+Version 1.0
 
 Michele Devetta (c) 2015
 
@@ -25,18 +25,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from distutils.core import setup
 
-setup(name='OAServer',
+setup(name='WorkSpawner',
       version='1.1.0',
-      description='Online Analysis Server Components',
+      description='WorkSpawner',
       author='Michele Devetta',
       author_email='michele.devetta@gmail.com',
       license='GPLv3',
       url='https://github.com/wyrdmeister/OnlineAnalysis',
-      packages=['OAServer'],
-      package_dir={'OAServer': 'src'},
+      packages=['WorkSpawner'],
+      package_dir={'WorkSpawner': 'src'},
       install_requires=[
           'PyTango >= 8',
-          'OACommon == 1.1.0',
-          'h5py >= 1.8',
-          'numpy >= 1.5'],
+	],
      )
